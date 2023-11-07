@@ -248,7 +248,7 @@ IMPORTANT: Prevent loading old driver r8188eu.
 echo "blacklist r8188eu" > /etc/modprobe.d/realtek.conf
 ```
 
-IF (bash/zsh): permission denied:
+IMPORTANT: 'zsh:/etc/modprobe.d/*: Permission denied'
 
 ```
 sudo sh -c 'echo "blacklist r8188eu" >> /etc/modprobe.d/realtek.conf'
