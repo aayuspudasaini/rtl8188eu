@@ -1,4 +1,4 @@
------
+---
 
 ## rtl8188eu (8188eu.ko)
 
@@ -12,12 +12,12 @@
 ## Specification
 
 - Supported interface modes:
-  * IBSS
-  * managed
-  * AP
-  * monitor
-  * P2P-client
-  * P2P-GO
+  - IBSS
+  - managed
+  - AP
+  - monitor
+  - P2P-client
+  - P2P-GO
 - Packet injection
 - TX power control
 - LED control
@@ -25,7 +25,7 @@
 - Driver debug log level control
 - REGD source selection
 - Security:
-  * WEP 64/128-bit, WPA, WPA2, and WPA3
+  - WEP 64/128-bit, WPA, WPA2, and WPA3
 
 ## Supported adapters
 
@@ -61,10 +61,10 @@ Start WPA3 (WPA3-SAE) SoftAP.
 TX power control tested with SoftAP mode and OpenWrt firmware (OpenWrt 21.02.0 r16279-5cc0535800, Channel Analysis Feature).
 
 - Ubuntu 22.04 (kernel 5.19)
-  * Aircrack-ng 1.6
-  * hcxdumptool 6.2.6
-  * wpa_supplicant v2.11-devel-hostap_2_10-309-gc3d389b72
-  * hostapd v2.11-devel-hostap_2_10-309-gc3d389b72
+  - Aircrack-ng 1.6
+  - hcxdumptool 6.2.6
+  - wpa_supplicant v2.11-devel-hostap_2_10-309-gc3d389b72
+  - hostapd v2.11-devel-hostap_2_10-309-gc3d389b72
 
 <details>
   <summary>
@@ -248,6 +248,12 @@ IMPORTANT: Prevent loading old driver r8188eu.
 echo "blacklist r8188eu" > /etc/modprobe.d/realtek.conf
 ```
 
+IF (bash/zsh): permission denied:
+
+```
+sudo sh -c 'echo "blacklist r8188eu" >> /etc/modprobe.d/realtek.conf'
+```
+
 Raspberry Pi:
 
 Edit `Makefile`:
@@ -261,13 +267,16 @@ or
 Ln147 - CONFIG_PLATFORM_RPI_ARM64 = `n` to CONFIG_PLATFORM_RPI_ARM64 = `y` for ARM64
 
 ### DKMS installation
+
 ```
 sudo git clone "https://github.com/ivanovborislav/rtl8188eu.git" /usr/src/rtl8188eu-5.13.3
 sudo dkms add -m rtl8188eu -v 5.13.3
 sudo dkms autoinstall
 dkms status
 ```
+
 or
+
 ```
 sudo git clone "https://github.com/ivanovborislav/rtl8188eu.git" /usr/src/rtl8188eu-5.13.3
 sudo dkms add -m rtl8188eu -v 5.13.3
@@ -307,11 +316,13 @@ sudo iw dev <interface> set txpower fixed 3000
 #### Change driver options during inserting driver module
 
 Remove (unload) a module from the Linux kernel.
+
 ```
 sudo rmmod /lib/modules/$(uname -r)/kernel/drivers/net/wireless/8188eu.ko
 ```
 
 Insert (load) a module into the Linux kernel.
+
 ```
 sudo insmod /lib/modules/$(uname -r)/kernel/drivers/net/wireless/8188eu.ko rtw_ips_mode=1 rtw_drv_log_level=4 rtw_power_mgnt=2 rtw_led_ctrl=1
 ```
@@ -328,12 +339,14 @@ sudo cp -f 8188eu.conf /etc/modprobe.d
 Power saving control.
 
 IPS (Inactive Power Saving) Function, rtw_ips_mode=
+
 ```
 0:Disable IPS
 1:Enable IPS (default)
 ```
 
 LPS (Leisure Power Saving) Function, rtw_power_mgnt=
+
 ```
 0:Disable LPS
 1:Enable LPS
@@ -341,6 +354,7 @@ LPS (Leisure Power Saving) Function, rtw_power_mgnt=
 ```
 
 Driver debug log level control, rtw_drv_log_level=
+
 ```
 0:_DRV_NONE_
 1:_DRV_ALWAYS_
@@ -352,6 +366,7 @@ Driver debug log level control, rtw_drv_log_level=
 ```
 
 Driver LED control, rtw_led_ctrl=
+
 ```
 0:led off
 1:led blink (default)
@@ -359,6 +374,7 @@ Driver LED control, rtw_led_ctrl=
 ```
 
 Driver REGD source selection, rtw_regd_src=
+
 ```
 0:Realtek defined
 1:OS (default, get channel plan from OS)
@@ -386,6 +402,7 @@ network={
 ```
 
 Now start...
+
 ```
 sudo systemctl stop NetworkManager
 sudo killall wpa_supplicant
@@ -427,6 +444,7 @@ wpa_passphrase=1234567890
 ```
 
 Now start...
+
 ```
 sudo killall hostapd
 sudo hostapd -i <interface> hostapd.conf
@@ -439,7 +457,7 @@ sudo hostapd -i <interface> hostapd.conf
 - TP-Link TL-WN722N V3
 
 - Linksys WRT1200AC V2
-  * OpenWrt 21.02.0 r16279-5cc0535800 / LuCI openwrt-21.02 branch git-21.231.26241-422c175
+  - OpenWrt 21.02.0 r16279-5cc0535800 / LuCI openwrt-21.02 branch git-21.231.26241-422c175
 
 ```
 config wifi-iface 'default_radio1'
@@ -453,4 +471,4 @@ config wifi-iface 'default_radio1'
 	option ieee80211w '2'
 ```
 
------
+---
